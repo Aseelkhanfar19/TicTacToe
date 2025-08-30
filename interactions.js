@@ -5,9 +5,9 @@ var lastLetter; //The last entered letter 'X' or 'O'
 var row = document.getElementById('tb').rows;*/
 var win =
 [ 
- ["" , "" , ""] ,
+ ["" , "" , "" ],
  ["" , "" , ""] , 
- ["" , "" , "" ]]; //The default winners index
+ ["" , "" , ""] ]; //The default winners index
 
 function Check(idClicked) { 
 var idClick = document.getElementById(idClicked);    
@@ -17,6 +17,8 @@ if (!idClick.innerHTML && !lastLetter )
   idClick.innerHTML = "X"; 
  lastLetter=idClick.innerHTML;
  win[idClicked]=idClick.innerHTML;
+ checkWinner();
+ printWinArray();
 
 }
 else
@@ -26,7 +28,9 @@ else
          
       idClick.innerHTML = "O";    
       lastLetter=idClick.innerHTML;
-    //should check the winner here by add function
+       win[idClicked]=idClick.innerHTML;
+       checkWinner();
+       printWinArray();
            
      }
     else if (!idClick.innerHTML && lastLetter=="O") 
@@ -34,11 +38,15 @@ else
       document.getElementById(idClicked).style.color = 'white';     
       idClick.innerHTML = "X"; 
       lastLetter=idClick.innerHTML;
-      //should check the winner here by add function
+       win[idClicked]=idClick.innerHTML;
+       checkWinner();
+       printWinArray();
      }
     else
     {      
+       
     }
+   
 }
    
 } //end of function --> check
