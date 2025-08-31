@@ -8,16 +8,32 @@
 
     </head>
 <body>
-
+<!--window.location.reload(true); -->
+<!--this for play again-->
     
+<div id="nav">
+  <label id="Brand">Tic Tac Toe</label>
+  <ul>
+    <li id="Xply">
+      <div id="lblX" class="lbl">X</div>
+      <div class="score" id="xSc">0</div>
+      
+      
+    </li>
+    <li id="Oply">
+      <div id="lblX" class="lbl">O</div>
+      <div class="score" id="oSc">0</div>
+    </li>
+  </ul> 
+  <div id="playerTurn">
+  <label id="lblTurn">X's Turn</label>
+</div>
 
-<form id="nav">
-<ul>   
-  
- <li onclick="window.location.reload(true);">Play Again</li>      
-</ul> 
-  <hr/>    
-</form>
+
+</div>
+
+<div id="container">
+
 <table id="tb">
 
 <tr>
@@ -40,6 +56,9 @@
 </tr>    
 
 </table>
+
+
+</div>
 
    
 <script src="interactions.js"></script>     
