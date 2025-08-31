@@ -1,6 +1,7 @@
-var lastLetter; //The last entered letter 'X' or 'O'
-/*var table = document.getElementById('tb');
-var row = document.getElementById('tb').rows;*/
+var lastLetter; 
+var fullCells=0;
+var playerX=true;
+var playerO=false;
 var win =
 [
  [0,1,2],
@@ -24,33 +25,44 @@ var win =
 
 function Check(idClicked) { 
 var idClick = document.getElementById(idClicked);    
-if (!idClick.innerHTML && !lastLetter )
+if (!idClick.innerHTML && !lastLetter && fullCells !=9 ) // if empty
 {  
-  document.getElementById(idClicked).style.color = 'blue';    
+  playerX=true;
+  playerO=false;
+  document.getElementById(idClicked).style.color = 'white';    
   idClick.innerHTML = "X"; 
  lastLetter=idClick.innerHTML;
+ fullCells++;
  checkTd(idClicked);
 }
 else
 {
- if(!idClick.innerHTML && lastLetter=="X") 
+ if(!idClick.innerHTML && lastLetter=="X" && fullCells !=9) //if current=x
      { 
-         
-      idClick.innerHTML = "O";    
+      playerX=false;
+      playerO=true;  
+      idClick.innerHTML = "O";    //then write O
       lastLetter=idClick.innerHTML;
-    checkTd(idClicked);
+      fullCells++;
+      checkTd(idClicked);
+
            
      }
-    else if (!idClick.innerHTML && lastLetter=="O") 
+    else if (!idClick.innerHTML && lastLetter=="O" && fullCells !=9 ) 
      {
-      document.getElementById(idClicked).style.color = 'blue';     
+      playerX=true;
+      playerO=false;         
+      document.getElementById(idClicked).style.color = 'white';     
       idClick.innerHTML = "X"; 
       lastLetter=idClick.innerHTML;
+      fullCells++;
       checkTd(idClicked);
      }
-    else
-    {      
+    if(fullCells ==9)
+    {  
+     setTimeout(function(){window.location.reload();},100);
     }
+    console.log(fullCells);
 }
    
 } //end of function --> check
@@ -94,6 +106,7 @@ else if (idTd=="td8")
 {
 td8(lastLetter);
 }
+
 
 }//end of function -->checkTd
 
