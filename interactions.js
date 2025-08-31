@@ -2,6 +2,9 @@ var lastLetter;
 var fullCells=0;
 var playerX=true;
 var playerO=false;
+var xScore=0;
+var oScore=0;
+var playerWon=false;
 var win =
 [
  [0,1,2],
@@ -25,10 +28,12 @@ var win =
 
 function Check(idClicked) { 
 var idClick = document.getElementById(idClicked);    
+
 if (!idClick.innerHTML && !lastLetter && fullCells !=9 ) // if empty
 {  
   playerX=true;
   playerO=false;
+  document.getElementById("playerTurn").innerHTML="O's Turn";
   document.getElementById(idClicked).style.color = 'white';    
   idClick.innerHTML = "X"; 
  lastLetter=idClick.innerHTML;
@@ -39,8 +44,10 @@ else
 {
  if(!idClick.innerHTML && lastLetter=="X" && fullCells !=9) //if current=x
      { 
+    
       playerX=false;
       playerO=true;  
+      document.getElementById("playerTurn").innerHTML="X's Turn";
       idClick.innerHTML = "O";    //then write O
       lastLetter=idClick.innerHTML;
       fullCells++;
@@ -51,16 +58,18 @@ else
     else if (!idClick.innerHTML && lastLetter=="O" && fullCells !=9 ) 
      {
       playerX=true;
-      playerO=false;         
+      playerO=false; 
+      document.getElementById("playerTurn").innerHTML="O's Turn";        
       document.getElementById(idClicked).style.color = 'white';     
       idClick.innerHTML = "X"; 
       lastLetter=idClick.innerHTML;
       fullCells++;
       checkTd(idClicked);
      }
-    if(fullCells ==9)
+    if(fullCells ==9 && !playerWon)
     {  
-     setTimeout(function(){window.location.reload();},100);
+     document.getElementById("playerTurn").innerHTML="Tie";
+     setTimeout(function(){clearCells();},1000);
     }
     console.log(fullCells);
 }
@@ -132,22 +141,23 @@ function td0(id , letter)
     {
      td0.style.backgroundColor="cyan";       
      td1.style.backgroundColor="cyan";       
-     td2.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);  
+     td2.style.backgroundColor="cyan";  
+     winner(); 
+
     }
     else if(td3.innerHTML == letter && td6.innerHTML==letter)
     {
      td0.style.backgroundColor="cyan";       
      td3.style.backgroundColor="cyan";       
      td6.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);     
+     winner();    
     }
     else if (td4.innerHTML==letter && td8.innerHTML==letter)
     {
      td0.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
      td8.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);     
+     winner();   
     }
 
 }
@@ -175,14 +185,14 @@ function td1(letter)
      td0.style.backgroundColor="cyan";       
      td1.style.backgroundColor="cyan";       
      td2.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner();
     } 
     else if(td7.innerHTML==letter && td4.innerHTML==letter)
     {
      td1.style.backgroundColor="cyan";       
      td7.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner(); 
     }
 }
 
@@ -211,21 +221,21 @@ function td2(letter)
      td0.style.backgroundColor="cyan";       
      td1.style.backgroundColor="cyan";       
      td2.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner();
     } 
     else if(td6.innerHTML==letter && td4.innerHTML==letter)
     {
      td2.style.backgroundColor="cyan";       
      td6.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner();
     }
     else if(td5.innerHTML==letter && td8.innerHTML==letter)
     {
      td2.style.backgroundColor="cyan";       
      td5.style.backgroundColor="cyan";       
      td8.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);        
+     winner();        
     }
 }   
 
@@ -253,14 +263,14 @@ function td3(letter)
      td0.style.backgroundColor="cyan";       
      td3.style.backgroundColor="cyan";       
      td6.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner();
     } 
     else if(td4.innerHTML==letter && td5.innerHTML==letter)
     {
      td3.style.backgroundColor="cyan";       
      td5.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner(); 
     }
 }
 
@@ -291,28 +301,28 @@ function td4(letter)
      td4.style.backgroundColor="cyan";       
      td0.style.backgroundColor="cyan";       
      td8.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner(); 
     } 
     else if(td6.innerHTML==letter && td2.innerHTML==letter)
     {
      td4.style.backgroundColor="cyan";       
      td6.style.backgroundColor="cyan";       
      td2.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner();
     }
     else if(td5.innerHTML==letter && td3.innerHTML==letter)
     {
      td4.style.backgroundColor="cyan";       
      td5.style.backgroundColor="cyan";       
      td3.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);        
+     winner();        
     }
     else if (td1.innerHTML==letter && td7.innerHTML==letter)
     {
      td4.style.backgroundColor="cyan";       
      td1.style.backgroundColor="cyan";       
      td7.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);          
+     winner();          
     }
 }
 
@@ -339,14 +349,14 @@ function td5(letter)
      td5.style.backgroundColor="cyan";       
      td2.style.backgroundColor="cyan";       
      td8.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner();
     } 
     else if(td4.innerHTML==letter && td3.innerHTML==letter)
     {
      td5.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
      td3.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner(); 
     }
 }
 
@@ -375,21 +385,21 @@ function td6(letter)
      td6.style.backgroundColor="cyan";       
      td0.style.backgroundColor="cyan";       
      td3.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner(); 
     } 
     else if(td7.innerHTML==letter && td8.innerHTML==letter)
     {
      td6.style.backgroundColor="cyan";       
      td7.style.backgroundColor="cyan";       
      td8.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner();
     }
     else if(td4.innerHTML==letter && td2.innerHTML==letter)
     {
      td6.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
      td2.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);        
+     winner();        
     }
 }
 
@@ -416,14 +426,14 @@ function td7(letter)
      td7.style.backgroundColor="cyan";       
      td6.style.backgroundColor="cyan";       
      td8.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner(); 
     } 
     else if(td1.innerHTML==letter && td4.innerHTML==letter)
     {
      td7.style.backgroundColor="cyan";       
      td1.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200); 
+     winner(); 
     }
 }
 
@@ -452,21 +462,66 @@ function td8(letter)
      td8.style.backgroundColor="cyan";       
      td7.style.backgroundColor="cyan";       
      td6.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);  
+     winner();  
     }
     else if(td5.innerHTML == letter && td2.innerHTML==letter)
     {
      td8.style.backgroundColor="cyan";       
      td5.style.backgroundColor="cyan";       
      td2.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);     
+     winner();    
     }
     else if (td4.innerHTML==letter && td0.innerHTML==letter)
     {
      td8.style.backgroundColor="cyan";       
      td4.style.backgroundColor="cyan";       
      td0.style.backgroundColor="cyan";       
-     setTimeout(function(){window.location.reload();},200);     
+     winner();    
     }
 }
 
+function winner()
+{
+    if(playerX)  
+    {
+     playerWon=true;
+     document.getElementById("playerTurn").innerHTML="X won";
+     xScore++;
+     document.getElementById("xSc").innerHTML=xScore;
+     setTimeout(function(){clearCells();},600); 
+
+    }
+    else{
+    playerWon=true;
+     document.getElementById("playerTurn").innerHTML="O won";
+     oScore++;
+     document.getElementById("oSc").innerHTML=oScore;
+     setTimeout(function(){clearCells();},400);          
+    }
+}
+
+function clearCells()
+{
+    for(let i=0; i<9; i++)
+    {
+        document.getElementById("td"+i).innerHTML="";
+        document.getElementById("td"+i).style.backgroundColor="transparent";
+
+    }
+
+    playerWon=false;
+    fullCells=0;
+    playerX=true;
+    playerO=false;
+    lastLetter="";
+    if(xScore==5 || oScore==5)
+    {
+    xScore=0;
+    oScore=0;
+    document.getElementById("xSc").innerHTML=xScore;
+    document.getElementById("oSc").innerHTML=oScore;
+    }
+    document.getElementById("playerTurn").innerHTML="X's Turn";
+
+
+}

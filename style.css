@@ -12,7 +12,7 @@ position: fixed;
 top:0;    
 background-color:none;
 width:100%;    
-height:150px;
+height:200px;
 left:0;
 z-index: 100000;
 text-align: center;
@@ -30,11 +30,7 @@ border: 3px solid none;
 width: 500px;
 height:50px;
 }
-#reg 
-{
-margin-left:280px;    
-   
-}
+
 #nav ul >li
 {
 display: inline-block; 
@@ -76,6 +72,16 @@ box-shadow: 2px 3px 7px gray;
     height: 80%;
     box-sizing: border-box;  
 }
+#nav > #playerTurn
+{
+   border: 2px solid none; 
+   height: 40px;
+   font-family: cursive;
+   font-size:1.5pc;
+   font-weight: bold;
+   color: rgb(0, 0, 0);
+   transition: 300ms;
+}
 
 
 #Brand
@@ -87,6 +93,9 @@ font-weight: bold;
 font-size: 50px;
 text-shadow: 2px 3px 4px gray;
 }
+
+
+
 table
 {
 border-collapse: collapse;
@@ -94,7 +103,7 @@ border-collapse: collapse;
 /*background-color:    chocolate;*/ 
 margin:auto;
  position:relative;
-top:200px;
+top:230px;
 width:500px;
 height:300px;
 box-sizing: border-box; 
